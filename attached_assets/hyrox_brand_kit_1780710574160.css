@@ -1,0 +1,214 @@
+/* ============================================================
+   ARENA — Fitness-Racing Design System
+   An original brand kit. Drop into any project (Replit-ready).
+
+   HOW TO USE
+   1. Load fonts (add to your <head>):
+      <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Archivo+Expanded:wght@500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+   2. Link this file:  <link rel="stylesheet" href="arena.css">
+   3. Put  data-accent="volt|blue|magenta|acid"  on <body> to set the theme.
+
+   RULES OF THE SYSTEM
+   · Dark base, always.            · ONE accent per screen — it's a tool, not wallpaper.
+   · UPPERCASE for display type.   · Mono for every number (times, splits, ranks).
+   · Square-ish corners.           · Hairline borders, deep shadows.
+   ============================================================ */
+
+/* ---------- TOKENS ---------- */
+:root{
+  /* neutrals — cool near-black ramp */
+  --ink-900:#0a0b0d;  /* page background     */
+  --ink-850:#101216;  /* deep panel          */
+  --ink-800:#16191e;  /* surface             */
+  --ink-700:#1e2228;  /* card                */
+  --ink-600:#2a2f37;  /* hairline / divider  */
+  --ink-500:#3b414b;  /* strong border       */
+  --ink-400:#5a626e;  /* disabled / faint    */
+  --ink-300:#8a93a0;  /* muted text          */
+  --ink-200:#c3c9d2;  /* secondary text      */
+  --ink-100:#e9ecf0;  /* primary text        */
+  --ink-000:#ffffff;
+
+  /* accent — VOLT default (overridden by [data-accent]) */
+  --accent:        oklch(0.89 0.19 110);
+  --accent-press:  oklch(0.82 0.18 110);
+  --accent-soft:   oklch(0.89 0.19 110 / 0.14);
+  --accent-ink:    #0a0b0d;   /* text/icons that sit ON the accent */
+
+  /* semantic */
+  --pos:#3ddc84;   /* faster / win / PB   */
+  --neg:#ff5a5f;   /* slower / out / live */
+  --warn:#ffb020;
+
+  /* type families */
+  --font-display:'Archivo Expanded','Archivo',system-ui,sans-serif;
+  --font-ui:'Archivo',system-ui,-apple-system,sans-serif;
+  --font-mono:'Space Mono',ui-monospace,'SFMono-Regular',monospace;
+
+  /* type scale */
+  --t-display:clamp(56px, 8vw, 104px);
+  --t-h1:clamp(40px, 5vw, 60px);
+  --t-h2:34px;
+  --t-h3:23px;
+  --t-body-l:19px;
+  --t-body:16px;
+  --t-small:14px;
+  --t-micro:12px;
+
+  /* spacing scale (4-based) */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px;
+  --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px;
+
+  /* radius — tight, athletic */
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:22px; --r-pill:999px;
+
+  /* elevation + motion */
+  --shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 18px 40px -18px rgba(0,0,0,.7);
+  --shadow-lg:0 1px 0 rgba(255,255,255,.05) inset, 0 30px 70px -28px rgba(0,0,0,.8);
+  --ease:cubic-bezier(.2,.7,.2,1);
+
+  --maxw:1180px;
+}
+
+/* accent themes — set data-accent on <body> (or any ancestor) */
+[data-accent="volt"]   {--accent:oklch(0.89 0.19 110); --accent-press:oklch(0.82 0.18 110); --accent-soft:oklch(0.89 0.19 110/.14); --accent-ink:#0a0b0d;}
+[data-accent="blue"]   {--accent:oklch(0.74 0.16 248); --accent-press:oklch(0.67 0.16 248); --accent-soft:oklch(0.74 0.16 248/.16); --accent-ink:#04121f;}
+[data-accent="magenta"]{--accent:oklch(0.68 0.25 8);   --accent-press:oklch(0.61 0.25 8);   --accent-soft:oklch(0.68 0.25 8/.16);   --accent-ink:#190208;}
+[data-accent="acid"]   {--accent:oklch(0.86 0.22 150); --accent-press:oklch(0.79 0.21 150); --accent-soft:oklch(0.86 0.22 150/.16); --accent-ink:#04140a;}
+
+/* ---------- BASE / RESET ---------- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ink-900);
+  color:var(--ink-100);
+  font-family:var(--font-ui);
+  font-size:var(--t-body);
+  line-height:1.55;
+  letter-spacing:.005em;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:var(--accent-ink)}
+a{color:var(--accent);text-decoration:none}
+hr{height:1px;background:var(--ink-600);border:0;margin:var(--s-6) 0}
+
+/* ---------- LAYOUT HELPERS ---------- */
+.arena-wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--s-6)}
+.arena-stack{display:flex;flex-direction:column;gap:var(--s-4)}
+.arena-row{display:flex;align-items:center;gap:var(--s-4)}
+.arena-grid{display:grid;gap:var(--s-5)}
+.arena-grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.arena-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.arena-grid.cols-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:880px){
+  .arena-grid.cols-2,.arena-grid.cols-3,.arena-grid.cols-4{grid-template-columns:1fr}
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+.display{font-family:var(--font-display);font-weight:900;font-size:var(--t-display);
+  line-height:.92;letter-spacing:-.01em;text-transform:uppercase}
+.h1{font-family:var(--font-display);font-weight:800;font-size:var(--t-h1);
+  line-height:1;text-transform:uppercase;margin:0}
+.h2{font-family:var(--font-display);font-weight:800;font-size:var(--t-h2);
+  line-height:1.1;text-transform:uppercase;margin:0}
+.h3{font-family:var(--font-ui);font-weight:700;font-size:var(--t-h3);line-height:1.2;margin:0}
+.body-l{font-size:var(--t-body-l);color:var(--ink-200)}
+.small{font-size:var(--t-small)}
+.muted{color:var(--ink-300)}
+.accent-text{color:var(--accent)}
+.kicker{font-family:var(--font-mono);font-size:var(--t-micro);font-weight:700;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--accent)}
+.mono-label{font-family:var(--font-mono);font-size:var(--t-micro);font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-300)}
+.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+
+/* ---------- SURFACES ---------- */
+.card{background:var(--ink-700);border:1px solid var(--ink-600);
+  border-radius:var(--r-lg);padding:var(--s-5);box-shadow:var(--shadow)}
+.panel{background:var(--ink-850);border:1px solid var(--ink-600);border-radius:var(--r-lg)}
+
+/* ---------- BUTTONS ---------- */
+.btn{font-family:var(--font-ui);font-weight:700;font-size:var(--t-small);
+  letter-spacing:.06em;text-transform:uppercase;border:0;border-radius:var(--r-sm);
+  padding:14px 26px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;
+  transition:transform .12s var(--ease),background .15s,border-color .15s,box-shadow .15s}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{background:var(--accent-press)}
+.btn-solid{background:var(--ink-100);color:var(--ink-900)}
+.btn-solid:hover{background:var(--ink-200)}
+.btn-ghost{background:transparent;color:var(--ink-100);border:1px solid var(--ink-500)}
+.btn-ghost:hover{border-color:var(--ink-100);background:var(--ink-700)}
+.btn-lg{padding:18px 34px;font-size:var(--t-body)}
+.btn-sm{padding:10px 18px;font-size:var(--t-micro)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+
+/* ---------- BADGES / PILLS ---------- */
+.badge{font-family:var(--font-mono);font-size:var(--t-micro);font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:var(--r-pill);
+  border:1px solid var(--ink-500);color:var(--ink-200);display:inline-flex;align-items:center;gap:7px}
+.badge-fill{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.badge-pos{color:var(--pos);border-color:color-mix(in srgb,var(--pos) 45%,transparent)}
+.badge-neg{color:var(--neg);border-color:color-mix(in srgb,var(--neg) 45%,transparent)}
+.badge-live{color:var(--neg);border-color:color-mix(in srgb,var(--neg) 45%,transparent)}
+.badge-live::before{content:"";width:7px;height:7px;border-radius:50%;
+  background:var(--neg);animation:arena-pulse 1.4s infinite}
+@keyframes arena-pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ---------- STAT / METRIC TILE ---------- */
+.stat{background:var(--ink-700);border:1px solid var(--ink-600);border-radius:var(--r-lg);
+  padding:var(--s-5);position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
+.stat .stat-label{font-family:var(--font-mono);font-size:var(--t-micro);
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-300)}
+.stat .stat-value{font-family:var(--font-mono);font-weight:700;font-size:52px;line-height:1;
+  margin-top:10px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat .stat-delta{margin-top:10px;font-family:var(--font-mono);font-size:var(--t-small);font-weight:700}
+.stat .stat-delta.up{color:var(--pos)}
+.stat .stat-delta.dn{color:var(--neg)}
+
+/* ---------- LEADERBOARD ---------- */
+.leaderboard{background:var(--ink-800);border:1px solid var(--ink-600);
+  border-radius:var(--r-lg);overflow:hidden}
+.leaderboard .lb-row{display:grid;grid-template-columns:46px 1fr auto;gap:16px;
+  align-items:center;padding:15px 20px;border-top:1px solid var(--ink-700)}
+.leaderboard .lb-row:first-child{border-top:0}
+.leaderboard .lb-row.lead{background:var(--accent-soft)}
+.leaderboard .lb-pos{font-family:var(--font-display);font-weight:900;font-size:20px;color:var(--ink-400)}
+.leaderboard .lb-row.lead .lb-pos{color:var(--accent)}
+.leaderboard .lb-name{font-weight:700;letter-spacing:.02em}
+.leaderboard .lb-sub{font-family:var(--font-mono);font-size:var(--t-micro);
+  color:var(--ink-300);letter-spacing:.08em}
+.leaderboard .lb-time{font-family:var(--font-mono);font-weight:700;font-size:18px;
+  font-variant-numeric:tabular-nums}
+
+/* ---------- FORM FIELDS ---------- */
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-family:var(--font-mono);font-size:var(--t-micro);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-300)}
+.field input,.field select,.field textarea{
+  background:var(--ink-850);border:1px solid var(--ink-500);border-radius:var(--r-sm);
+  padding:14px 16px;color:var(--ink-100);font-family:var(--font-ui);font-size:var(--t-body);
+  outline:none;transition:border-color .15s,box-shadow .15s}
+.field input::placeholder{color:var(--ink-400)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+
+/* ---------- IMAGERY HELPERS ---------- */
+/* Wrap a photo and apply .img-darken for type-on-image legibility */
+.img-darken{position:relative}
+.img-darken::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg, var(--ink-900) 0%, transparent 60%)}
+.img-darken > .img-caption{position:absolute;left:22px;bottom:20px;z-index:2;
+  font-family:var(--font-display);font-weight:900;text-transform:uppercase;
+  font-size:30px;line-height:.95}
+.img-darken > .img-caption em{font-style:normal;color:var(--accent)}
+
+/* ---------- UTILITIES ---------- */
+.u-accent-bar{width:4px;align-self:stretch;background:var(--accent);border-radius:2px}
+.text-pos{color:var(--pos)} .text-neg{color:var(--neg)} .text-warn{color:var(--warn)}
+.mt-1{margin-top:var(--s-1)} .mt-2{margin-top:var(--s-2)} .mt-3{margin-top:var(--s-3)}
+.mt-4{margin-top:var(--s-4)} .mt-5{margin-top:var(--s-5)} .mt-6{margin-top:var(--s-6)}
+.mt-7{margin-top:var(--s-7)} .mt-8{margin-top:var(--s-8)}

@@ -1,0 +1,1 @@
+- [games schema drift vs drizzle push](games-schema-drift.md) — never run drizzle push on this repo's live Neon DB; it would drop un-modeled columns. Use ALTER TABLE via executeSql.

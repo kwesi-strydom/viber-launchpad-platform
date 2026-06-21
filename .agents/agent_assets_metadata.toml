@@ -1,0 +1,13 @@
+uploads = []
+
+[[generated]]
+id = "W07pLhy1FyJHmpVjqy8J8"
+uri = "file://client/src/assets/images/home-hero.png"
+type = "image"
+title = "Competitive coding arena"
+
+[[outputs]]
+id = "0ySpFXrl-MsTBtjm-xMZb"
+uri = "file://Viber5_Competitors_Roster.xlsx"
+type = "table"
+title = "Viber 5 Competitors Roster"

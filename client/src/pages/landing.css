@@ -1,0 +1,428 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  .viber-landing {
+    --bg: #0E0820;
+    --bg-2: #16102E;
+    --bg-3: #1E1638;
+    --ink: #FFFFFF;
+    --ink-dim: rgba(255,255,255,0.70);
+    --ink-faint: rgba(255,255,255,0.42);
+    --line: rgba(255,255,255,0.10);
+    --yellow: #F9CE32;
+    --coral:  #F25C5C;
+    --purple: #8B3FC4;
+    --teal:   #2FC4C4;
+    --plum:   #2A1056;
+    --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --maxw: 1280px;
+    --pad: clamp(20px, 5vw, 96px);
+  }
+
+  .viber-landing * { box-sizing: border-box; }
+  .viber-landing { scroll-behavior: smooth; }
+  .viber-landing {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .viber-landing a { color: inherit; text-decoration: none; }
+  .viber-landing img { display: block; max-width: 100%; }
+  .viber-landing h1, .viber-landing h2, .viber-landing h3, .viber-landing h4 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em; margin: 0; }
+
+  .viber-landing .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); }
+  .viber-landing .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--yellow);
+    margin: 0 0 22px;
+    font-weight: 500;
+  }
+  .viber-landing .eyebrow.dim { color: var(--ink-faint); }
+
+  .viber-landing .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 16px 28px;
+    border-radius: 999px;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+    white-space: nowrap;
+  }
+  .viber-landing .btn-primary { background: var(--yellow); color: var(--plum); }
+  .viber-landing .btn-primary:hover { transform: translateY(-2px); background: #ffe06a; }
+  .viber-landing .btn-ghost { border-color: rgba(255,255,255,0.30); color: var(--ink); }
+  .viber-landing .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .viber-landing .btn-coral { background: var(--coral); color: #fff; }
+  .viber-landing .btn-coral:hover { transform: translateY(-2px); background: #ff6f6f; }
+
+  /* ============ NAV ============ */
+  .viber-landing header.nav {
+    position: fixed; inset: 0 0 auto 0;
+    z-index: 100;
+    transition: background .3s ease, backdrop-filter .3s ease, border-color .3s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .viber-landing header.nav.scrolled {
+    background: rgba(14,8,32,0.82);
+    backdrop-filter: blur(14px);
+    border-bottom-color: var(--line);
+  }
+  .viber-landing .nav-inner {
+    max-width: var(--maxw); margin: 0 auto;
+    padding: 18px var(--pad);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+  }
+  .viber-landing .nav-logo { display: flex; align-items: center; gap: 12px; }
+  .viber-landing .nav-logo img { height: 40px; width: auto; }
+  .viber-landing .nav-links {
+    display: flex; align-items: center; gap: 34px;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .viber-landing .nav-links a { color: var(--ink-dim); transition: color .15s; white-space: nowrap; }
+  .viber-landing .nav-links a:hover { color: var(--ink); }
+  .viber-landing .nav-cta { display: flex; align-items: center; gap: 14px; }
+  .viber-landing .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
+  .viber-landing .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--ink); margin: 5px 0; transition: .25s; }
+
+  /* ============ HERO ============ */
+  .viber-landing .hero {
+    position: relative;
+    padding-top: 150px;
+    padding-bottom: 80px;
+    overflow: hidden;
+    background:
+      radial-gradient(1200px 680px at 82% 10%, rgba(139,63,196,0.42), transparent 62%),
+      radial-gradient(1000px 620px at 6% 86%, rgba(47,196,196,0.26), transparent 60%),
+      linear-gradient(180deg, #0E0820 0%, #140A2A 100%);
+  }
+  .viber-landing .hero-stripe { display: flex; height: 8px; width: 100%; }
+  .viber-landing .hero-stripe span { flex: 1; }
+  .viber-landing .s-y { background: var(--yellow); } .viber-landing .s-c { background: var(--coral); }
+  .viber-landing .s-p { background: var(--purple); } .viber-landing .s-t { background: var(--teal); }
+
+  .viber-landing .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 40px;
+  }
+  .viber-landing .hero h1 {
+    font-size: clamp(48px, 7.2vw, 116px);
+    line-height: 0.92;
+    font-weight: 800;
+  }
+  .viber-landing .hero h1 em { font-style: normal; color: var(--yellow); }
+  .viber-landing .hero .sub {
+    font-size: clamp(18px, 2vw, 24px);
+    color: var(--ink-dim);
+    line-height: 1.45;
+    max-width: 560px;
+    margin: 28px 0 0;
+  }
+  .viber-landing .hero-cta { display: flex; gap: 16px; margin-top: 38px; flex-wrap: wrap; }
+
+  /* countdown */
+  .viber-landing .countdown-card {
+    margin-top: 44px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.03);
+    border-radius: 20px;
+    padding: 26px 30px;
+    max-width: 560px;
+  }
+  .viber-landing .countdown-top {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; margin-bottom: 20px;
+  }
+  .viber-landing .countdown-top .label {
+    font-family: var(--font-mono); font-size: 13px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-dim);
+  }
+  .viber-landing .countdown-top .badge {
+    font-family: var(--font-mono); font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--plum); background: var(--yellow);
+    padding: 6px 12px; border-radius: 999px; font-weight: 700;
+  }
+  .viber-landing .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .viber-landing .cd-cell { text-align: center; }
+  .viber-landing .cd-num {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(34px, 5vw, 52px); line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .viber-landing .cd-cell:nth-child(1) .cd-num { color: var(--yellow); }
+  .viber-landing .cd-cell:nth-child(2) .cd-num { color: var(--coral); }
+  .viber-landing .cd-cell:nth-child(3) .cd-num { color: var(--teal); }
+  .viber-landing .cd-cell:nth-child(4) .cd-num { color: var(--purple); }
+  .viber-landing .cd-lab {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint);
+    margin-top: 8px;
+  }
+
+  /* hero photo collage */
+  .viber-landing .hero-collage { position: relative; aspect-ratio: 1 / 1.04; }
+  .viber-landing .hero-collage .ph {
+    position: absolute; border-radius: 18px; overflow: hidden;
+    border: 7px solid; box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+  }
+  .viber-landing .hero-collage .ph img { width: 100%; height: 100%; object-fit: cover; }
+  .viber-landing .hero-collage .ph.back {
+    width: 72%; aspect-ratio: 1/1; top: 0; left: 0;
+    transform: rotate(-5deg); border-color: var(--coral); z-index: 1;
+  }
+  .viber-landing .hero-collage .ph.front {
+    width: 72%; aspect-ratio: 1/1; bottom: 0; right: 0;
+    transform: rotate(3.5deg); border-color: var(--yellow); z-index: 2;
+  }
+  .viber-landing .hero-collage .tagchip {
+    position: absolute; z-index: 3; bottom: 9%; left: 50%; transform: translateX(-50%) rotate(-3deg);
+    background: var(--teal); color: var(--plum);
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 9px 16px; border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+  }
+
+  /* ============ MARQUEE ============ */
+  .viber-landing .marquee {
+    background: var(--yellow); color: var(--plum);
+    overflow: hidden; white-space: nowrap;
+    border-top: 3px solid var(--plum); border-bottom: 3px solid var(--plum);
+    padding: 16px 0;
+  }
+  .viber-landing .marquee-track {
+    display: inline-flex; gap: 40px; align-items: center;
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 26px; letter-spacing: -0.01em;
+    animation: viber-scroll-left 28s linear infinite;
+  }
+  .viber-landing .marquee-track span { display: inline-flex; align-items: center; gap: 40px; }
+  .viber-landing .marquee .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--plum); display: inline-block; }
+  @keyframes viber-scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .viber-landing .marquee-track { animation: none; } }
+
+  /* ============ SECTIONS ============ */
+  .viber-landing section.block { padding: clamp(72px, 10vw, 140px) 0; }
+  .viber-landing section.block.alt { background: var(--bg-2); }
+  .viber-landing .sec-head { max-width: 880px; margin-bottom: 64px; }
+  .viber-landing .sec-head h2 { font-size: clamp(34px, 5vw, 68px); line-height: 0.98; }
+  .viber-landing .sec-head p { font-size: clamp(17px, 1.6vw, 22px); color: var(--ink-dim); line-height: 1.5; margin: 24px 0 0; }
+
+  /* positioning / surfaces */
+  .viber-landing .surfaces { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .viber-landing .surface {
+    border-radius: 24px; padding: 44px;
+    min-height: 280px; display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+    transition: transform .2s ease;
+  }
+  .viber-landing .surface:hover { transform: translateY(-4px); }
+  .viber-landing .surface .s-label {
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.18em;
+    text-transform: uppercase; opacity: 0.7;
+  }
+  .viber-landing .surface h3 { font-size: 34px; line-height: 1.04; margin: 14px 0 12px; }
+  .viber-landing .surface p { font-size: 16.5px; line-height: 1.45; margin: 0; opacity: 0.92; }
+  .viber-landing .surface.live { background: linear-gradient(150deg, var(--yellow), #FFB022); color: var(--plum); }
+  .viber-landing .surface.platform { background: linear-gradient(150deg, var(--coral), #C73B6E); }
+  .viber-landing .surface.market { background: linear-gradient(150deg, var(--teal), #1E8FA8); }
+  .viber-landing .surface.community { background: linear-gradient(150deg, var(--purple), #4A2A85); }
+  .viber-landing .surface .num {
+    font-family: var(--font-display); font-weight: 800; font-size: 70px;
+    opacity: 0.28; line-height: 1; align-self: flex-end;
+  }
+
+  /* lifecycle */
+  .viber-landing .lifecycle { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; position: relative; }
+  .viber-landing .lifecycle::before {
+    content: ""; position: absolute; top: 19px; left: 2%; right: 2%; height: 2px;
+    background: linear-gradient(90deg, var(--yellow), var(--coral), var(--purple), var(--teal));
+    opacity: 0.7;
+  }
+  .viber-landing .phase { position: relative; padding-top: 56px; }
+  .viber-landing .phase .dot {
+    position: absolute; top: 6px; left: 0; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--yellow); border: 4px solid var(--bg); box-shadow: 0 0 0 3px var(--yellow);
+  }
+  .viber-landing .alt .phase .dot { border-color: var(--bg-2); }
+  .viber-landing .phase:nth-child(2) .dot { background: var(--coral); box-shadow: 0 0 0 3px var(--coral); }
+  .viber-landing .phase:nth-child(3) .dot { background: var(--purple); box-shadow: 0 0 0 3px var(--purple); }
+  .viber-landing .phase:nth-child(4) .dot { background: var(--teal); box-shadow: 0 0 0 3px var(--teal); }
+  .viber-landing .phase:nth-child(5) .dot { background: var(--teal); box-shadow: 0 0 0 3px var(--teal); }
+  .viber-landing .phase .pnum { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; color: var(--ink-faint); margin-bottom: 12px; }
+  .viber-landing .phase h4 { font-size: 25px; line-height: 1.05; margin-bottom: 12px; }
+  .viber-landing .phase.book h4 { color: var(--yellow); }
+  .viber-landing .phase.book.out h4 { color: var(--teal); }
+  .viber-landing .phase p { font-size: 15.5px; color: var(--ink-dim); line-height: 1.45; margin: 0; }
+
+  /* launchpad */
+  .viber-landing .lp-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 64px; align-items: center; }
+  .viber-landing .lp-shot { border-radius: 22px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 40px 90px rgba(0,0,0,0.5); }
+  .viber-landing .lp-shot img { width: 100%; height: auto; }
+  .viber-landing .lp-feats { display: flex; flex-direction: column; gap: 4px; }
+  .viber-landing .lp-feat { display: flex; gap: 22px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .viber-landing .lp-feat:last-child { border-bottom: none; }
+  .viber-landing .lp-feat .gl {
+    width: 52px; height: 52px; flex-shrink: 0; border-radius: 13px;
+    display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; font-size: 22px;
+  }
+  .viber-landing .lp-feat:nth-child(1) .gl { background: rgba(249,206,50,0.14); color: var(--yellow); }
+  .viber-landing .lp-feat:nth-child(2) .gl { background: rgba(242,92,92,0.16); color: var(--coral); }
+  .viber-landing .lp-feat:nth-child(3) .gl { background: rgba(47,196,196,0.16); color: var(--teal); }
+  .viber-landing .lp-feat:nth-child(4) .gl { background: rgba(139,63,196,0.20); color: var(--purple); }
+  .viber-landing .lp-feat h4 { font-size: 22px; margin-bottom: 6px; }
+  .viber-landing .lp-feat p { font-size: 15.5px; color: var(--ink-dim); line-height: 1.45; margin: 0; }
+
+  /* tracks */
+  .viber-landing .tracks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .viber-landing .track {
+    border-radius: 22px; padding: 36px 32px; min-height: 320px;
+    background: var(--bg-3); border: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 14px;
+    transition: transform .2s ease, border-color .2s ease;
+  }
+  .viber-landing .track:hover { transform: translateY(-5px); }
+  .viber-landing .track .tk-top { display: flex; align-items: center; justify-content: space-between; }
+  .viber-landing .track .tier { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); }
+  .viber-landing .track h3 { font-size: 40px; line-height: 1; }
+  .viber-landing .track p { font-size: 15.5px; color: var(--ink-dim); line-height: 1.45; margin: 0; }
+  .viber-landing .track .chip { margin-top: auto; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; width: fit-content; padding: 7px 14px; border-radius: 999px; }
+  .viber-landing .track.pro { border-color: rgba(249,206,50,0.35); } .viber-landing .track.pro h3 { color: var(--yellow); } .viber-landing .track.pro .chip { background: rgba(249,206,50,0.14); color: var(--yellow); }
+  .viber-landing .track.crypto { border-color: rgba(242,92,92,0.32); } .viber-landing .track.crypto h3 { color: var(--coral); } .viber-landing .track.crypto .chip { background: rgba(242,92,92,0.14); color: var(--coral); }
+  .viber-landing .track.beginner { border-color: rgba(47,196,196,0.32); } .viber-landing .track.beginner h3 { color: var(--teal); } .viber-landing .track.beginner .chip { background: rgba(47,196,196,0.14); color: var(--teal); }
+  .viber-landing .track.kids { border-color: rgba(139,63,196,0.40); } .viber-landing .track.kids h3 { color: var(--purple); } .viber-landing .track.kids .chip { background: rgba(139,63,196,0.20); color: var(--purple); }
+
+  /* gallery */
+  .viber-landing .gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: 16px; }
+  .viber-landing .gallery .g { border-radius: 16px; overflow: hidden; position: relative; }
+  .viber-landing .gallery .g img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+  .viber-landing .gallery .g:hover img { transform: scale(1.06); }
+  .viber-landing .gallery .g .cap {
+    position: absolute; left: 16px; bottom: 14px; z-index: 2;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+  }
+  .viber-landing .gallery .g::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.5)); }
+  .viber-landing .g-wide { grid-column: span 2; } .viber-landing .g-tall { grid-row: span 2; }
+
+  /* stats */
+  .viber-landing .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .viber-landing .stat { border-radius: 22px; background: var(--bg-3); border: 1px solid var(--line); padding: 40px 34px; }
+  .viber-landing .stat .unit { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 16px; }
+  .viber-landing .stat .big { font-family: var(--font-display); font-weight: 800; font-size: clamp(56px, 7vw, 92px); line-height: 0.85; letter-spacing: -0.04em; margin-bottom: 18px; }
+  .viber-landing .stat:nth-child(1) .big { color: var(--yellow); }
+  .viber-landing .stat:nth-child(2) .big { color: var(--coral); }
+  .viber-landing .stat:nth-child(3) .big { color: var(--teal); }
+  .viber-landing .stat:nth-child(4) .big { color: var(--purple); }
+  .viber-landing .stat p { font-size: 15px; color: var(--ink-dim); line-height: 1.4; margin: 0; }
+
+  /* partners */
+  .viber-landing .ways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .viber-landing .way { border-radius: 24px; background: var(--bg-3); border: 1px solid var(--line); padding: 44px 40px; display: flex; flex-direction: column; gap: 18px; }
+  .viber-landing .way .who { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .viber-landing .way.spons .who { color: var(--yellow); } .viber-landing .way.tools .who { color: var(--coral); } .viber-landing .way.invest .who { color: var(--teal); }
+  .viber-landing .way h3 { font-size: 36px; line-height: 1; }
+  .viber-landing .way > p { font-size: 16px; color: var(--ink-dim); line-height: 1.45; margin: 0; }
+  .viber-landing .way ul { list-style: none; margin: auto 0 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .viber-landing .way li { font-size: 15px; color: var(--ink-dim); line-height: 1.35; padding-left: 24px; position: relative; }
+  .viber-landing .way li::before { content: "→"; position: absolute; left: 0; font-family: var(--font-mono); }
+  .viber-landing .way.spons li::before { color: var(--yellow); } .viber-landing .way.tools li::before { color: var(--coral); } .viber-landing .way.invest li::before { color: var(--teal); }
+
+  /* team */
+  .viber-landing .team-grid { display: grid; grid-template-columns: 460px 1fr; gap: 56px; align-items: center; }
+  .viber-landing .team-photo { border-radius: 22px; overflow: hidden; border: 1px solid var(--line); position: relative; aspect-ratio: 4/3.4; }
+  .viber-landing .team-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 28%; }
+  .viber-landing .team-photo .cap { position: absolute; left: 18px; bottom: 14px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.8); }
+  .viber-landing .founders { display: flex; flex-direction: column; gap: 16px; margin: 30px 0; }
+  .viber-landing .fcard { background: var(--bg-3); border: 1px solid var(--line); border-radius: 16px; padding: 22px 26px; }
+  .viber-landing .fcard.deb { border-left: 4px solid var(--coral); } .viber-landing .fcard.steph { border-left: 4px solid var(--teal); }
+  .viber-landing .fcard .role { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 6px; }
+  .viber-landing .fcard.deb .role { color: var(--coral); } .viber-landing .fcard.steph .role { color: var(--teal); }
+  .viber-landing .fcard .name { font-size: 26px; margin: 0 0 6px; }
+  .viber-landing .fcard p { font-size: 15px; color: var(--ink-dim); line-height: 1.4; margin: 0; }
+
+  /* closing CTA */
+  .viber-landing .cta {
+    position: relative; overflow: hidden; text-align: center;
+    padding: clamp(80px, 12vw, 170px) 0;
+    background:
+      radial-gradient(1100px 560px at 78% 26%, rgba(242,92,92,0.30), transparent 60%),
+      radial-gradient(1000px 560px at 12% 80%, rgba(47,196,196,0.22), transparent 60%),
+      var(--bg);
+  }
+  .viber-landing .cta h2 { font-size: clamp(54px, 11vw, 168px); line-height: 0.85; font-weight: 800; }
+  .viber-landing .cta h2 em { font-style: normal; color: var(--yellow); }
+  .viber-landing .cta p { font-size: clamp(18px, 2vw, 24px); color: var(--ink-dim); margin: 30px auto 0; max-width: 620px; line-height: 1.5; }
+  .viber-landing .cta-row { display: flex; gap: 16px; justify-content: center; margin-top: 42px; flex-wrap: wrap; }
+
+  /* footer */
+  .viber-landing footer { background: var(--bg-2); border-top: 1px solid var(--line); padding: 72px 0 40px; }
+  .viber-landing .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
+  .viber-landing .foot-brand img { height: 44px; margin-bottom: 18px; }
+  .viber-landing .foot-brand p { font-size: 15px; color: var(--ink-dim); line-height: 1.5; max-width: 320px; margin: 0; }
+  .viber-landing .foot-col h5 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 18px; font-weight: 500; }
+  .viber-landing .foot-col a { display: block; font-size: 15px; color: var(--ink-dim); margin-bottom: 12px; transition: color .15s; }
+  .viber-landing .foot-col a:hover { color: var(--ink); }
+  .viber-landing .foot-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; gap: 20px; flex-wrap: wrap; }
+
+  /* reveal animation */
+  .viber-landing .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .viber-landing .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .viber-landing .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    .viber-landing .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .viber-landing .hero-collage { max-width: 460px; }
+    .viber-landing .surfaces { grid-template-columns: 1fr 1fr; }
+    .viber-landing .lifecycle { grid-template-columns: 1fr 1fr; }
+    .viber-landing .lifecycle::before { display: none; }
+    .viber-landing .lp-grid { grid-template-columns: 1fr; gap: 40px; }
+    .viber-landing .tracks { grid-template-columns: 1fr 1fr; }
+    .viber-landing .stats { grid-template-columns: 1fr 1fr; }
+    .viber-landing .ways { grid-template-columns: 1fr; max-width: 620px; }
+    .viber-landing .team-grid { grid-template-columns: 1fr; }
+    .viber-landing .gallery { grid-template-columns: repeat(2, 1fr); }
+    .viber-landing .g-wide { grid-column: span 2; }
+    .viber-landing .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 680px) {
+    .viber-landing .nav-links { display: none; }
+    .viber-landing .nav-links.open {
+      display: flex; flex-direction: column; gap: 22px;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(14,8,32,0.97); backdrop-filter: blur(14px);
+      padding: 28px var(--pad); border-bottom: 1px solid var(--line);
+    }
+    .viber-landing .nav-cta .btn-ghost { display: none; }
+    .viber-landing .nav-toggle { display: block; }
+    .viber-landing .surfaces { grid-template-columns: 1fr; }
+    .viber-landing .lifecycle { grid-template-columns: 1fr; }
+    .viber-landing .tracks { grid-template-columns: 1fr; }
+    .viber-landing .stats { grid-template-columns: 1fr; }
+    .viber-landing .gallery { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+    .viber-landing .g-wide, .viber-landing .g-tall { grid-column: auto; grid-row: auto; }
+    .viber-landing .foot-grid { grid-template-columns: 1fr; }
+    .viber-landing .countdown-card { padding: 22px; }
+  }
+
+.viber-landing { scroll-behavior: smooth; }

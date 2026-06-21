@@ -1,0 +1,144 @@
+Verify if a user is a member of the Network School Discord server from your application. Use this to build "Login with NS" functionality for third-party apps.
+
+How It Works
+Your app implements Discord OAuth (standard, using your own Discord app)
+After login, your app has the user's Discord ID
+Your app calls our verify endpoint with that Discord ID
+We check if the user is an NS member, and send you basic information about the user like their role, date joined, etc.
+NS Auth sequence diagram
+
+Getting Started
+1. Register Your App
+Register your application at ns.com/platform. Once we review and approve it, we'll send you your API key and access credentials. For questions, reach out to support@ns.com.
+
+2. Set Up Discord OAuth
+Create a Discord application at discord.com/developers and implement OAuth2. You need the identify scope at minimum.
+
+3. Call the Verify Endpoint
+After your user logs in via Discord, call our API with their Discord ID.
+
+API Reference
+POST /api/v1/ns-auth/verify
+Verify a Discord user's NS membership.
+
+Headers
+
+Header	Required	Description
+X-Api-Key	Yes	Your API key (starts with nsauth_)
+Content-Type	Yes	application/json
+Request Body
+
+{
+  "discordId": "<discord-user-id>"
+}
+Response — Member
+
+{
+  "member": true,
+  "discordId": "...",
+  "discordUsername": "john",
+  "discordAvatar": "abc123hash",
+  "roles": ["Core"],
+  "userType": "core",
+  "name": "John Doe",
+  "username": "john_ns",
+  "email": "john@example.com"
+}
+Fields returned depend on your app's approved scopes. Fields may be null if the user hasn't linked their Discord on ns.com.
+
+Response — Not a Member
+
+{
+  "member": false
+}
+No additional data is returned for non-members.
+
+Error Responses
+
+Status	Meaning
+400	Missing or invalid discordId
+401	Missing or invalid API key
+403	App not approved or deactivated
+429	Rate limit exceeded (20 requests/minute)
+502	Discord API error — try again later
+Scopes
+Your app is assigned scopes during approval. These control what data is returned.
+
+Scope	Data
+membership	member (true/false), discordId — always included
+roles	roles (Discord server roles), userType (core, longterm, member, etc.)
+profile	name, username, discordUsername, discordAvatar
+email	email (if available)
+Code Examples
+Next.js with NextAuth
+import NextAuth from 'next-auth';
+import DiscordProvider from 'next-auth/providers/discord';
+
+export const { handlers, auth } = NextAuth({
+  providers: [
+    DiscordProvider({
+      clientId: process.env.DISCORD_CLIENT_ID!,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET!,
+    }),
+  ],
+  callbacks: {
+    async signIn({ profile }) {
+      // Verify NS membership
+      const res = await fetch('https://api.ns.com/api/v1/ns-auth/verify', {
+        method: 'POST',
+        headers: {
+          'X-Api-Key': process.env.NS_AUTH_API_KEY!,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ discordId: profile?.id }),
+      });
+      const data = await res.json();
+
+      // Only allow NS members
+      return data.member === true;
+    },
+  },
+});
+React (Manual Discord OAuth)
+// After completing Discord OAuth and getting the user's Discord ID:
+
+async function verifyNSMembership(discordId: string) {
+  const res = await fetch('/api/ns-verify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ discordId }),
+  });
+  return res.json();
+}
+
+// Your backend route (/api/ns-verify) should call our API
+// with the API key server-side — never expose the key in frontend code.
+Python
+import os
+import requests
+
+# Store your API key in an environment variable — never hardcode it
+NS_AUTH_API_KEY = os.environ["NS_AUTH_API_KEY"]
+
+def verify_ns_membership(discord_id: str) -> dict:
+    response = requests.post(
+        "https://api.ns.com/api/v1/ns-auth/verify",
+        headers={
+            "X-Api-Key": NS_AUTH_API_KEY,
+            "Content-Type": "application/json",
+        },
+        json={"discordId": discord_id},
+    )
+    response.raise_for_status()
+    return response.json()
+
+result = verify_ns_membership("123456789")
+if result["member"]:
+    print(f"Welcome, {result.get('name', 'NS member')}!")
+else:
+    print("Not an NS member.")
+Security
+Keep your API key server-side. Never include it in frontend code or client bundles.
+Validate the response. Always check member === true before granting access.
+Discord IDs are public identifiers. They are not secrets, but your API key is.
+Rate limits apply. 20 requests per minute per API key.
